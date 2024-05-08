@@ -2,9 +2,9 @@
   <div class="register-container">
     <h1>Register</h1>
     <form @submit.prevent="register">
-      <input v-model="email" placeholder="Email" />
-      <input v-model="password" type="password" placeholder="Password" />
-      <input v-model="confirmPassword" type="password" placeholder="Confirm Password" />
+      <input v-model="username" placeholder="请输入用户名💡"/>
+      <input v-model="password" type="password" placeholder="密码长度大于1且不超过20位🔒" @blur="validatePassword"/>
+      <input v-model="confirmPassword" type="password" placeholder="再次输入密码！"/>
       <button type="submit">Register</button>
     </form>
   </div>
@@ -15,7 +15,7 @@ export default {
   name: 'RegisterPage',
   data() {
     return {
-      email: '',
+      username: '',
       password: '',
       confirmPassword: '',
     };
@@ -25,6 +25,12 @@ export default {
       // Handle registration logic here
       console.log('Registering...');
     },
+    validatePassword() {
+      if (this.password.length < 1 || this.password.length > 20) {
+        alert('密码长度必须大于1且不超过20位');
+        this.password = ''; // 清空不符合要求的密码
+      }
+    }
   },
 };
 </script>
