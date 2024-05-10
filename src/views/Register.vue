@@ -1,11 +1,19 @@
 <template>
   <div class="register-container">
-    <h1>Register</h1>
+    <h1 class="cls-title">注册页</h1>
     <form @submit.prevent="register">
-      <input v-model="username" placeholder="请输入用户名💡"/>
-      <input v-model="password" type="password" placeholder="密码长度大于1且不超过20位🔒" @blur="validatePassword"/>
-      <input v-model="confirmPassword" type="password" placeholder="再次输入密码！"/>
-      <button type="submit">Register</button>
+
+      <p><input v-model="username" placeholder="请输入用户名💡"/></p>
+      <p>
+        <input v-model="password" type="password" placeholder="密码长度大于1且不超过20位🔒" @blur="validatePassword"/>
+      </p>
+      <p><input v-model="confirmPassword" type="password" placeholder="再次输入密码！"/></p>
+
+      <div class="button-container">
+        <button type="submit">注册</button>
+        <button type="button" class="login-button">已有账号🔥去登陆</button>
+      </div>
+
     </form>
   </div>
 </template>
@@ -30,26 +38,40 @@ export default {
         alert('密码长度必须大于1且不超过20位');
         this.password = ''; // 清空不符合要求的密码
       }
-    }
+    },
   },
 };
 </script>
 
 <style scoped>
+
+.cls-title {
+  text-align: center;
+  margin-top: 150px; /* 往下移动50像素，你可以根据需要调整这个值 */
+}
+
 .register-container {
-  max-width: 400px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* 让容器宽度自适应屏幕 */
+  height: 100%; /* 让容器高度自适应屏幕 */
   margin: 0 auto;
   padding: 20px;
   border: 2px solid #ccc;
   border-radius: 10px;
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-size: cover; /* 控制背景图片的尺寸，cover 会自动缩放背景图以填充容器 */
+  background-position: center; /* 控制背景图片的位置，这里让背景图片居中 */
 }
 
+
 input {
-  width: 300px;
-  padding: 10px;
-  margin-bottom: 10px;
+  width: 400px;
+  padding: 15px;
+  margin-bottom: 5px;
   border-radius: 10px;
-  border: 1.5px solid #ccc;
+  border: 1px solid #ccc;
 }
 
 button {
@@ -59,5 +81,22 @@ button {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* 在水平方向上居中 */
+}
+
+.button-container button {
+  margin-right: 30px; /* 调整按钮之间的间距，根据需要调整 */
+}
+
+.login-button {
+  background-color: #0066cc; /* 深蓝色 */
+  color: #fff; /* 文字颜色 */
 }
 </style>
+
