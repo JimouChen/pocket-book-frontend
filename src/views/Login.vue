@@ -1,17 +1,15 @@
 <template>
-  <div class="register-container">
-    <h1 class="cls-title">注册页</h1>
-    <form @submit.prevent="register">
+  <div class="login-container">
+    <h1 class="cls-title">登陆页</h1>
+    <form @submit.prevent="login">
 
       <p><input v-model="username" placeholder="请输入用户名💡"/></p>
       <p>
         <input v-model="password" type="password" placeholder="密码长度大于1且不超过20位🔒" @blur="validatePassword"/>
       </p>
-      <p><input v-model="confirmPassword" type="password" placeholder="再次输入密码！"/></p>
 
       <div class="button-container">
-        <button type="submit">注册</button>
-        <router-link to="/login" class="login-button-link">已有账号🔥去登陆</router-link>
+        <button type="submit">登陆</button>
       </div>
 
     </form>
@@ -20,7 +18,7 @@
 
 <script>
 export default {
-  name: 'RegisterPage',
+  name: 'LoginPage',
   data() {
     return {
       username: '',
@@ -29,16 +27,15 @@ export default {
     };
   },
   methods: {
-    register() {
-      // Handle registration logic here
-      console.log('Registering...');
+    login() {
+      console.log('Login...');
     },
     validatePassword() {
       if (this.password.length < 1 || this.password.length > 20) {
         alert('密码长度必须大于1且不超过20位');
         this.password = ''; // 清空不符合要求的密码
       }
-    },
+    }
   },
 };
 </script>
@@ -50,7 +47,7 @@ export default {
   margin-top: 150px; /* 往下移动50像素，你可以根据需要调整这个值 */
 }
 
-.register-container {
+.login-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -60,7 +57,7 @@ export default {
   padding: 20px;
   border: 2px solid #ccc;
   border-radius: 10px;
-  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%);
   background-size: cover; /* 控制背景图片的尺寸，cover 会自动缩放背景图以填充容器 */
   background-position: center; /* 控制背景图片的位置，这里让背景图片居中 */
 }
@@ -82,7 +79,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
   font-size: 15px;
-  font-weight: bold;
+  font-weight: bold; /* 让按钮文字变粗 */
 }
 
 .button-container {
@@ -94,17 +91,10 @@ button {
   margin-right: 30px; /* 调整按钮之间的间距，根据需要调整 */
 }
 
-
-.login-button-link {
-  display: inline-block; /* 将 <router-link> 变成块级元素，以便设置宽度和高度 */
-  background-color: #0066cc; /* 去除背景色 */
-  color: #fff; /* 设置字体颜色为白色 */
-  text-decoration: none; /* 去除超链接的下划线 */
-  padding: 10px 20px; /* 设置按钮的内边距 */
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer; /* 设置光标为手型 */
+.login-button {
+  background-color: #0066cc; /* 深蓝色 */
+  color: #fff; /* 文字颜色 */
+  /* 其他样式 */
 }
-
 </style>
 

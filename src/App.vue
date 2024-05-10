@@ -1,15 +1,16 @@
 <template>
-  <RegisterPage></RegisterPage>
+<!--  <RegisterPage></RegisterPage>-->
+  <router-view></router-view>
 </template>
 
 <script>
-import RegisterPage from "@/views/Register.vue";
+// import RegisterPage from "@/views/Register.vue";
 
 export default {
   name: 'App',
-  components: {
-    RegisterPage,
-  }
+  // components: {
+  //   RegisterPage,
+  // }
 }
 </script>
 
