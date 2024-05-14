@@ -19,6 +19,9 @@
 </template>
 
 <script>
+
+import api from "../api/index";
+
 export default {
   name: 'RegisterPage',
   data() {
@@ -30,8 +33,10 @@ export default {
   },
   methods: {
     register() {
-      // Handle registration logic here
       console.log('Registering...');
+      api.userRegister(this.username, this.password, this.confirmPassword).then(response => {
+        console.log(response.data);
+      })
     },
     validatePassword() {
       if (this.password.length < 1 || this.password.length > 20) {

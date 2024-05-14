@@ -17,18 +17,26 @@
 </template>
 
 <script>
+import api from "../api/index";
+
+
 export default {
   name: 'LoginPage',
   data() {
     return {
-      username: '',
-      password: '',
-      confirmPassword: '',
+      username: null,
+      password: null,
     };
   },
   methods: {
     login() {
-      console.log('Login...');
+      // api.getAllCategories().then(response => {
+      //   console.log(response.data);
+      // })
+      api.userLogin(this.username, this.password).then(response => {
+        console.log(this.username, this.password)
+        console.log(response.data);
+      })
     },
     validatePassword() {
       if (this.password.length < 1 || this.password.length > 20) {
