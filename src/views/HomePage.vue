@@ -1,16 +1,16 @@
 <template>
   <div class="home-container">
     <div class="product-info">
-      <h1 class="title">记账App</h1>
-      <p class="description">简约易用的记账工具，帮助您轻松管理财务。</p>
+      <h1 class="title">🧾记账本App</h1>
+      <p class="description">🔥简约易用的记账工具，帮助您轻松管理财务。🤭</p>
     </div>
     <div class="action-buttons">
-      <router-link to="/signup" class="btn">立即注册</router-link>
+      <router-link to="/signup" class="btn">👉立即注册</router-link>
       <router-link to="/login" class="btn btn-secondary">登录</router-link>
     </div>
     <div class="copyright">
       <p class="copyright-text">
-        <span>© 2024 PocketApp 版权所有@Neaya</span>
+        <span>© 2024 PocketBookApp 版权所有@Neaya</span>
       </p>
       <p></p>
     </div>
@@ -64,7 +64,7 @@ export default {
   margin: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #ffafbd;
+  background-color: #9198e1;
   color: #fff;
   font-size: 1.1em;
   font-weight: bold;
@@ -77,7 +77,7 @@ export default {
 }
 
 .btn-secondary {
-  background-color: #ffafbd;
+  background-color: #f38fa0;
   border: 2px solid #fff;
 }
 
