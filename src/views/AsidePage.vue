@@ -1,6 +1,9 @@
 <template>
+  <div style="margin-top: 40px">
+    <img src="../assets/salary.png" alt="Icon" style="width: 60px; height: 60px;">
+  </div>
 
-  <el-menu default-active="1" class="el-menu-vertical-pocket">
+  <el-menu default-active="1" class="el-menu-vertical-pocket" style="margin-top: 20px">
     <el-menu-item index="1" class="sub-menu">
       <el-icon>
         <HomeFilled/>
@@ -41,7 +44,7 @@
 
 <style>
 .el-menu-vertical-pocket {
-  width: 180px;
+  width: 160px;
   min-height: 400px;
   font-size: 20px;
   font-weight: bold;
@@ -60,6 +63,7 @@
 
 .sub-menu .el-icon {
   font-size: 20px; /* 设置图标的大小为 24 像素 */
+  color: #ec9867;
 }
 
 
