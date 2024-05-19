@@ -13,12 +13,21 @@
       </div>
 
     </form>
+    <div
+        style="margin-top: 40px; display: flex; justify-content: center;
+         align-items: center; max-width: 600px;
+         margin-left: auto; margin-right: auto;">
+      <el-alert v-if="showAlert" title="提示 ⚠️" type="error"
+                :description="assertMsg"
+                style="width: 400px; border-radius: 20px; font-weight: bold;"
+                show-icon/>
+    </div>
+
   </div>
 </template>
 
 <script>
 import api from "../api/index";
-
 
 export default {
   name: 'LoginPage',
@@ -26,9 +35,21 @@ export default {
     return {
       username: null,
       password: null,
+      showAlert: false,
+      assertMsg: '',
     };
   },
   methods: {
+    showAlertAfterLogin(response) {
+      this.assertMsg = response.data.msg;
+      this.showAlert = true;
+
+      // 设置一个定时器，在两秒后执行
+      setTimeout(() => {
+        // 两秒后自动关闭提示框
+        this.showAlert = false;
+      }, 2000);
+    },
     login() {
       // api.getAllCategories().then(response => {
       //   console.log(response.data);
@@ -36,7 +57,18 @@ export default {
       api.userLogin(this.username, this.password).then(response => {
         console.log(this.username, this.password)
         console.log(response.data);
-      })
+        if (response.data.code === 1000) {
+          localStorage.setItem('username', this.username);
+          localStorage.setItem('password', this.password);
+          this.$router.push('/preview');
+        } else {
+          this.showAlertAfterLogin(response);
+          console.log(response.data.msg);
+        }
+      }).catch(error => {
+        console.error('登录失败:', error);
+        // 处理登录错误，例如显示错误消息
+      });
     },
     validatePassword() {
       if (this.password.length < 1 || this.password.length > 20) {
@@ -104,5 +136,7 @@ button {
   color: #fff; /* 文字颜色 */
   /* 其他样式 */
 }
+
+
 </style>
 

@@ -9,10 +9,10 @@
       <el-container>
         <el-header class="cls-header"><h3 class="cls-h3">Welcome欢迎使用记账本App</h3>
           <el-dropdown @command="handleCommand">
-            <span class="dropdown-link">
+            <span class="dropdown-link" style="font-weight: bold;">
               <el-avatar
                   src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-              /> UserName
+              /> {{ username }}
             </span>
             <template #dropdown>
               <el-dropdown-menu>
@@ -114,5 +114,5 @@ const handleMenuClick = (index) => {
   currentPage.value = index; // 更新当前选中的页面
   console.log(index)
 };
-
+const username = localStorage.getItem('username')
 </script>
