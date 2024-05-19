@@ -22,6 +22,26 @@ const routes = [
         name: 'preview',
         component: () => import('../views/PreviewPage.vue'),
     },
+    {
+        path: '/preview/overview',
+        name: 'overview',
+        component: () => import('../views/bodyPages/OverviewPage.vue'),
+    },
+    {
+        path: '/preview/gey_pay',
+        name: 'gey_pay',
+        component: () => import('../views/bodyPages/GetPay.vue'),
+    },
+    {
+        path: '/preview/income',
+        name: 'income',
+        component: () => import('../views/bodyPages/IncomePage.vue'),
+    },
+    {
+        path: '/preview/setting',
+        name: 'setting',
+        component: () => import('../views/bodyPages/SettingPage.vue'),
+    },
 ]
 
 const route = createRouter({

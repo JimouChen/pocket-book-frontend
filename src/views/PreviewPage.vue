@@ -3,7 +3,7 @@
   <div class="main-layout">
     <el-container>
       <el-aside width="160px" class="sidebar">
-        <AsidePage class="cls-aside"></AsidePage>
+        <AsidePage class="cls-aside" @menuClick="handleMenuClick"></AsidePage>
       </el-aside>
 
       <el-container>
@@ -22,8 +22,23 @@
             </template>
           </el-dropdown>
         </el-header>
+        <!--        这里可以跟随点击侧边栏的模块来进入不同的主体页-->
+        <el-main class="cls-main">
+          <template v-if="currentPage === 'GetPay'">
+            <GetPay/>
+          </template>
+          <template v-else-if="currentPage === 'IncomePage'">
+            <IncomePage/>
+          </template>
+          <template v-else-if="currentPage === 'SettingPage'">
+            <SettingPage/>
+          </template>
+          <template v-else>
+            <OverviewPage/>
+          </template>
 
-        <el-main class="cls-main">Main</el-main>
+
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -85,6 +100,19 @@ const handleCommand = (command) => {
     // 处理退出登录的逻辑
     console.log('退出登录');
   }
+};
+
+import {ref} from 'vue';
+
+import OverviewPage from "../views/bodyPages/OverviewPage.vue"
+import IncomePage from "../views/bodyPages/IncomePage.vue"
+import GetPay from "../views/bodyPages/GetPay.vue"
+import SettingPage from "../views/bodyPages/SettingPage.vue"
+
+const currentPage = ref('home'); // 默认为首页
+const handleMenuClick = (index) => {
+  currentPage.value = index; // 更新当前选中的页面
+  console.log(index)
 };
 
 </script>

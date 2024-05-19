@@ -4,7 +4,7 @@
   </div>
 
   <el-menu default-active="1" class="el-menu-vertical-pocket" style="margin-top: 20px">
-    <el-menu-item index="1" class="sub-menu">
+    <el-menu-item index="1" class="sub-menu" @click="$emit('menuClick', 'OverviewPage')">
       <el-icon>
         <HomeFilled/>
       </el-icon>
@@ -13,14 +13,14 @@
       </template>
     </el-menu-item>
 
-    <el-menu-item index="2" class="sub-menu">
+    <el-menu-item index="2" class="sub-menu" @click="$emit('menuClick', 'GetPay')">
       <el-icon>
         <Coin/>
       </el-icon>
       <template #title>支出</template>
     </el-menu-item>
 
-    <el-menu-item index="3" class="sub-menu">
+    <el-menu-item index="3" class="sub-menu" @click="$emit('menuClick', 'IncomePage')">
       <el-icon>
         <WalletFilled/>
       </el-icon>
@@ -29,7 +29,7 @@
       </template>
     </el-menu-item>
 
-    <el-menu-item index="4" class="sub-menu">
+    <el-menu-item index="4" class="sub-menu" @click="$emit('menuClick', 'SettingPage')">
       <el-icon>
         <setting/>
       </el-icon>
@@ -38,7 +38,11 @@
   </el-menu>
 </template>
 
-<script setup>
+<script>
+
+export default {
+  name: 'AsidePage',
+}
 
 </script>
 
