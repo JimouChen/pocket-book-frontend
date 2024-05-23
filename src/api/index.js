@@ -10,7 +10,7 @@ const api = {
                 "username": username,
                 "password": password
             }
-        )
+        );
     },
     userRegister(username, password, rePassword) {
         return axios.post(
@@ -20,11 +20,13 @@ const api = {
                 "password": password,
                 "re_password": rePassword
             }
-        )
+        );
     },
-
     getAllCategories() {
         return axios.get(path.baseURL + path.getAllCategoriesUrl);
+    },
+    getCateByUser(username) {
+        return axios.get(path.baseURL + path.getCateByUser + username);
     }
 }
 

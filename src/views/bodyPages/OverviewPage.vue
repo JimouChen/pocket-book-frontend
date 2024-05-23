@@ -20,21 +20,24 @@
     <div class="add-cls-container">
       <h3>右侧是添加分类和展示分类的模块 </h3>
       <!-- Your search box content goes here -->
+        <OverviewRight/>
     </div>
   </div>
 </template>
 
 <script>
 import {Search} from '@element-plus/icons-vue'
+import OverviewRight from "@/views/bodyPages/OverviewRightPage.vue";
 
 export default {
   name: 'OverviewPage',
+  components: {OverviewRight},
   data() {
     return {
       value1: [],
       SearchIcon: Search,
       defaultTime1: new Date(2000, 1, 1, 12, 0, 0),
-    }
+    };
   },
   methods: {
     parseTime(date) {
@@ -60,7 +63,7 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>

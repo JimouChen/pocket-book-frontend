@@ -3,6 +3,7 @@ const base = {
     loginUrl: '/user/login',
     getAllCategoriesUrl: "/all_category",
     registerUrl: '/user/signup',
+    getCateByUser: '/category?username='
 }
 
 export default base;

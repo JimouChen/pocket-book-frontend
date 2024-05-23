@@ -60,6 +60,7 @@ export default {
         if (response.data.code === 1000) {
           localStorage.setItem('username', this.username);
           localStorage.setItem('password', this.password);
+          localStorage.setItem('UserId', response.data.data);
           this.$router.push('/preview');
         } else {
           this.showAlertAfterLogin(response);
