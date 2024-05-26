@@ -1,5 +1,7 @@
 import path from './path';
 import axios from '../utils/request';
+import UserService from "@/utils/userUtil";
+// import UserService from "@/utils/userUtil";
 
 
 const api = {
@@ -27,7 +29,16 @@ const api = {
     },
     getCateByUser(username) {
         return axios.get(path.baseURL + path.getCateByUser + username);
-    }
+    },
+    addCategoryUrl(categoryName) {
+        return axios.post(
+            path.baseURL + path.addCategoryUrl,
+            {
+                "name": categoryName,
+                "UserId": UserService.getUserId()
+            },
+        )
+    },
 }
 
 export default api;

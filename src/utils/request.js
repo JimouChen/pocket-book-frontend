@@ -35,7 +35,7 @@ instance.interceptors.request.use(
     // 处理成功的请求
     config => {
         // if (config.method === "post" || config.method === "put") {
-        //     console.log(config.data)
+        //     console.log(config.headers)
         // }
         return config;
     },

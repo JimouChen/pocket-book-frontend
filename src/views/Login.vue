@@ -28,6 +28,7 @@
 
 <script>
 import api from "../api/index";
+import UserService from "../utils/userUtil";
 
 export default {
   name: 'LoginPage',
@@ -58,9 +59,12 @@ export default {
         console.log(this.username, this.password)
         console.log(response.data);
         if (response.data.code === 1000) {
-          localStorage.setItem('username', this.username);
+          // localStorage.setItem('username', this.username);
           localStorage.setItem('password', this.password);
-          localStorage.setItem('UserId', response.data.data);
+          // localStorage.setItem('UserId', response.data.data);
+          UserService.setUserId(response.data.data)
+          UserService.setUsername(this.username)
+
           this.$router.push('/preview');
         } else {
           this.showAlertAfterLogin(response);
