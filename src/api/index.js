@@ -1,7 +1,6 @@
 import path from './path';
 import axios from '../utils/request';
 import UserService from "@/utils/userUtil";
-// import UserService from "@/utils/userUtil";
 
 
 const api = {
@@ -39,6 +38,12 @@ const api = {
             },
         )
     },
+    deleteCategoryUrl(categoryId) {
+        return axios.delete(
+            path.baseURL + path.deleteCategoryUrl + `?categoryId=${categoryId}`,
+        )
+    }
+
 }
 
 export default api;

@@ -20,7 +20,7 @@
       添加分类
     </el-button>
     <el-button round>↔️</el-button>
-    <el-button type="danger" round>删除分类</el-button>
+    <el-button type="danger" round @click="deleteCate">删除分类</el-button>
 
     <el-dialog style="border-radius: 15px; font-weight: bold" v-model="dialogFormVisible"
                title="请填写你要新增的记账分类" width="450">
@@ -53,7 +53,8 @@ export default {
     return {
       checkAll: false,
       isIndeterminate: true,
-      checkedCate: [], //拿到打勾的分类，可以进行删除传参
+      checkedCate: [], //拿到打勾的分类，用来展示
+      // checkedCateIds: [], //拿到打勾的分类id，可以进行删除传参
       username: '',
       categories: [],
       dialogFormVisible: false,
@@ -68,6 +69,7 @@ export default {
   mounted() {
     this.username = UserService.getUsername();
     api.getCateByUser(this.username).then(response => {
+      // this.checkedCateIds = response.data.data.map(item => item.id)
       this.categories = response.data.data.map(item => item.name)
     })
   },
@@ -89,6 +91,10 @@ export default {
         console.log(response.data);
       })
       window.location.reload();
+    },
+    deleteCate(){
+      console.log(this.checkedCate)
+      // console.log(this.checkedCateIds)
     }
   }
 };

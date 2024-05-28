@@ -1,4 +1,5 @@
 import axios from "axios"
+import UserService from "@/utils/userUtil";
 
 const instance = axios.create({
     timeout: 5000,
@@ -34,9 +35,8 @@ const errorHandle = (status, info) => {
 instance.interceptors.request.use(
     // 处理成功的请求
     config => {
-        // if (config.method === "post" || config.method === "put") {
-        //     console.log(config.headers)
-        // }
+        config.headers['UserId'] = UserService.getUserId();
+        config.headers['username'] = UserService.getUsername();
         return config;
     },
     // 处理失败的请求

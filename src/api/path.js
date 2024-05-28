@@ -5,6 +5,7 @@ const base = {
     getAllCategoriesUrl: "/all_category",
     getCateByUser: '/category?username=',
     addCategoryUrl: '/category',
+    deleteCategoryUrl: '/category',
 }
 
 export default base;
