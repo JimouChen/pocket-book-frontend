@@ -38,9 +38,12 @@ const api = {
             },
         )
     },
-    deleteCategoryUrl(categoryId) {
+    deleteCategoryUrl(categoryNames) {
         return axios.delete(
-            path.baseURL + path.deleteCategoryUrl + `?categoryId=${categoryId}`,
+            path.baseURL + path.deleteCategoryUrl,
+            {
+                data: {categoryNames}
+            }
         )
     }
 

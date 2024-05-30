@@ -94,7 +94,8 @@ export default {
     },
     deleteCate(){
       console.log(this.checkedCate)
-      // console.log(this.checkedCateIds)
+      api.deleteCategoryUrl(this.checkedCate).then(() => {})
+      window.location.reload();
     }
   }
 };
