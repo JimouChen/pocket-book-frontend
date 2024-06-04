@@ -20,7 +20,6 @@
         记录支出
       </el-button>
       <p> 这里展示查询结果</p>
-
     </div>
 
     <!--    这里是添加支出的信息-->
@@ -40,12 +39,27 @@
           </el-select>
         </el-form-item>
 
+        <el-form-item class="center-form" label="请输入标题📓" :label-width="formLabelWidth">
+          <el-input v-model="form.title" autocomplete="off" :maxlength="20" placeholder="请输入标题"/>
+        </el-form-item>
+
         <el-form-item class="center-form" label="请输入支出金额💰" :label-width="formLabelWidth">
-          <el-input v-model="form.cost" autocomplete="off" :maxlength="20" placeholder="请输入金额数字"/>
+          <el-input v-model="form.amount" autocomplete="off" :maxlength="20" placeholder="请输入金额数字"/>
+        </el-form-item>
+
+        <el-form-item class="center-form" label="请输入交易日期📅" :label-width="formLabelWidth">
+          <div class="block">
+            <span class="demonstration"></span>
+            <el-date-picker
+                v-model="form.transactionDate"
+                type="datetime"
+                placeholder="Select date and time"
+            />
+          </div>
         </el-form-item>
 
         <el-form-item class="center-form" label="备注📝" :label-width="formLabelWidth">
-          <el-input class="custom-input" v-model="form.desc" autocomplete="off" :maxlength="200"
+          <el-input class="custom-input" v-model="form.description" autocomplete="off" :maxlength="200"
                     placeholder="备注️(选填)" type="textarea"/>
         </el-form-item>
 
@@ -69,6 +83,8 @@
 import {Search} from "@element-plus/icons-vue";
 import UserService from "@/utils/userUtil";
 import api from "@/api";
+import billingType from "@/utils/constDataUtil";
+
 
 export default {
   name: 'GetPay',
@@ -80,8 +96,10 @@ export default {
       dialogFormVisible: false,
       formLabelWidth: '150px',
       form: {
-        desc: '',
-        cost: '',
+        description: '',
+        amount: '',
+        transactionDate: new Date(),
+        title: '',
         selectCateId: '',
         categories: [],
         delivery: false,
@@ -120,6 +138,23 @@ export default {
     confirmAdd() {
       this.dialogFormVisible = false;
       console.log(this.form, 'ppp')
+      const formData = {
+        title: this.form.title,
+        description: this.form.description,
+        amount: parseFloat(this.form.amount), // 确保金额是数字
+        category_id: this.form.selectCateId,
+        transaction_date: this.parseTime(this.form.transactionDate),
+        type: billingType.Pay,
+      };
+      api.addExpenses(formData).then(response => {
+        console.log(response.data);
+        // 这里之后可优化为校验弹框
+        if (response.data.code !== 1000) {
+          alert("请检查是否有必填项未填写⚠️")
+        }
+      }).catch(error => {
+        console.error('错误:', error);
+      });
     },
   }
 }

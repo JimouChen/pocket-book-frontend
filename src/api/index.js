@@ -29,7 +29,7 @@ const api = {
     getCateByUser(username) {
         return axios.get(path.baseURL + path.getCateByUser + username);
     },
-    addCategoryUrl(categoryName) {
+    addCategoryByName(categoryName) {
         return axios.post(
             path.baseURL + path.addCategoryUrl,
             {
@@ -38,12 +38,18 @@ const api = {
             },
         )
     },
-    deleteCategoryUrl(categoryNames) {
+    deleteCategoryByNames(categoryNames) {
         return axios.delete(
             path.baseURL + path.deleteCategoryUrl,
             {
                 data: {categoryNames}
             }
+        )
+    },
+    addExpenses(formData) {
+        return axios.post(
+            path.baseURL + path.addExpensesUrl,
+            formData
         )
     }
 

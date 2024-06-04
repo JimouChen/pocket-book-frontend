@@ -52,9 +52,6 @@ export default {
       }, 2000);
     },
     login() {
-      // api.getAllCategories().then(response => {
-      //   console.log(response.data);
-      // })
       api.userLogin(this.username, this.password).then(response => {
         console.log(this.username, this.password)
         console.log(response.data);

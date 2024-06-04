@@ -87,14 +87,14 @@ export default {
       this.dialogFormVisible = false;
       console.log(this.form.name, 'ppp')
       // this.form.name 传给后端
-      api.addCategoryUrl(this.form.name).then(response => {
+      api.addCategoryByName(this.form.name).then(response => {
         console.log(response.data);
       })
       window.location.reload();
     },
     deleteCate(){
       console.log(this.checkedCate)
-      api.deleteCategoryUrl(this.checkedCate).then(() => {})
+      api.deleteCategoryByNames(this.checkedCate).then(() => {})
       window.location.reload();
     }
   }
