@@ -6,7 +6,8 @@ const base = {
     getCateByUser: '/category?username=',
     addCategoryUrl: '/category',
     deleteCategoryUrl: '/category',
-    addExpensesUrl: '/billing/expenses'
+    addExpensesUrl: '/billing/expenses',
+    searchExpensesUrl: '/billing/search',
 }
 
 export default base;

@@ -1,6 +1,7 @@
 import path from './path';
 import axios from '../utils/request';
 import UserService from "@/utils/userUtil";
+import billingType from "@/utils/constDataUtil";
 
 
 const api = {
@@ -50,6 +51,17 @@ const api = {
         return axios.post(
             path.baseURL + path.addExpensesUrl,
             formData
+        )
+    },
+    searchExpenses(beginDate, endDate, title) {
+        return axios.post(
+            path.baseURL + path.searchExpensesUrl,
+            {
+                title: title,
+                type: billingType.Pay,
+                transaction_begin_date: beginDate,
+                transaction_end_date: endDate
+            }
         )
     }
 

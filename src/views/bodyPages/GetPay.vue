@@ -22,6 +22,11 @@
       <p> 这里展示查询结果</p>
     </div>
 
+    <!--    展示查询结果-->
+    <!--    <GetPayShowData></GetPayShowData>-->
+    <GetPayShowData :begin-date="beginDate" :end-date="endDate">
+    </GetPayShowData>
+
     <!--    这里是添加支出的信息-->
 
     <el-dialog style="border-radius: 15px; font-weight: bold" v-model="dialogFormVisible"
@@ -84,15 +89,19 @@ import {Search} from "@element-plus/icons-vue";
 import UserService from "@/utils/userUtil";
 import api from "@/api";
 import billingType from "@/utils/constDataUtil";
+import GetPayShowData from "@/views/bodyPages/GetPayShowData.vue";
 
 
 export default {
   name: 'GetPay',
+  components: {GetPayShowData},
   data() {
     return {
       value1: [],
       SearchIcon: Search,
       defaultTime1: new Date(2000, 1, 1, 12, 0, 0),
+      beginDate: '',
+      endDate: '',
       dialogFormVisible: false,
       formLabelWidth: '150px',
       form: {
@@ -124,7 +133,9 @@ export default {
     },
     SureOk() {
       if (this.value1 === null) {
-        // 时间选择器清空，Do nothing
+        // 时间选择器清空
+        this.beginDate = '';
+        this.endDate = '';
       } else {
         const startDate = this.value1[0];
         const endDate = this.value1[1];
@@ -133,6 +144,8 @@ export default {
         // 这两个时间要传给后端
         console.log("开始日期:", formattedStartDate);
         console.log("结束日期:", formattedEndDate);
+        this.beginDate = formattedStartDate;
+        this.endDate = formattedEndDate;
       }
     },
     confirmAdd() {
@@ -151,6 +164,8 @@ export default {
         // 这里之后可优化为校验弹框
         if (response.data.code !== 1000) {
           alert("请检查是否有必填项未填写⚠️")
+        } else {
+          console.log('添加成功')
         }
       }).catch(error => {
         console.error('错误:', error);
