@@ -53,14 +53,16 @@ const api = {
             formData
         )
     },
-    searchExpenses(beginDate, endDate, title) {
+    searchExpenses(beginDate, endDate, title, limit, offset) {
         return axios.post(
             path.baseURL + path.searchExpensesUrl,
             {
                 title: title,
                 type: billingType.Pay,
                 transaction_begin_date: beginDate,
-                transaction_end_date: endDate
+                transaction_end_date: endDate,
+                limit: limit,
+                offset: offset
             }
         )
     }

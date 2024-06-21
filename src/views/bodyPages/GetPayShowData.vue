@@ -23,6 +23,10 @@
       </template>
     </el-table-column>
   </el-table>
+  <p></p>
+  <el-pagination background layout="prev, pager, next"
+                 :total="100"
+                 @current-change="handlePageChange"/>
 </template>
 
 <script>
@@ -36,6 +40,9 @@ export default {
     return {
       filterTableData: [], // 表格数据
       search: '', // 搜索框绑定的数据
+      offset: 0, // 当前页码
+      limit: 10, // 每页显示的条目数
+      total: 100, // 总条目数
     };
   },
   created() {
@@ -44,7 +51,8 @@ export default {
   methods: {
     fetchData() {
       api.searchExpenses(
-          this.beginDate, this.endDate, this.search
+          this.beginDate, this.endDate, this.search,
+          this.limit, this.offset
       ).then(response => {
         console.log('fk', this.beginDate, this.endDate);
         this.filterTableData = response.data.data;
@@ -59,6 +67,11 @@ export default {
       console.log('Deleting row:', row);
       // 这里可以添加删除数据的请求逻辑
     },
+    handlePageChange(currentPage) {
+      // 由第几页得到offset
+      this.offset = (currentPage - 1) * this.limit;
+      this.fetchData();
+    }
   },
 
 };
