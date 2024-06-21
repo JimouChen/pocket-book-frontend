@@ -41,7 +41,7 @@ export default {
       filterTableData: [], // 表格数据
       search: '', // 搜索框绑定的数据
       offset: 0, // 当前页码
-      limit: 10, // 每页显示的条目数
+      limit: 5, // 每页显示的条目数
       total: 100, // 总条目数
     };
   },
@@ -54,7 +54,6 @@ export default {
           this.beginDate, this.endDate, this.search,
           this.limit, this.offset
       ).then(response => {
-        console.log('fk', this.beginDate, this.endDate);
         this.filterTableData = response.data.data;
       })
     },
