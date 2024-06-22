@@ -25,7 +25,8 @@
   </el-table>
   <p></p>
   <el-pagination background layout="prev, pager, next"
-                 :total="100"
+                 :total="total"
+                 :page-size="limit"
                  @current-change="handlePageChange"/>
 </template>
 
@@ -42,7 +43,7 @@ export default {
       search: '', // 搜索框绑定的数据
       offset: 0, // 当前页码
       limit: 5, // 每页显示的条目数
-      total: 100, // 总条目数
+      total: 0, // 后端返回的总条目数
     };
   },
   created() {
@@ -54,7 +55,8 @@ export default {
           this.beginDate, this.endDate, this.search,
           this.limit, this.offset
       ).then(response => {
-        this.filterTableData = response.data.data;
+        this.filterTableData = response.data.data.resList;
+        this.total = response.data.data.total;
       })
     },
     handleEdit(index, row) {
