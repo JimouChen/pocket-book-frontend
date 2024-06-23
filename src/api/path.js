@@ -7,6 +7,7 @@ const base = {
     addCategoryUrl: '/category',
     deleteCategoryUrl: '/category',
     addExpensesUrl: '/billing/expenses',
+    editExpensesUrl: '/billing/expenses',
     searchExpensesUrl: '/billing/search',
 }
 

@@ -8,7 +8,7 @@
 
       <el-container>
         <el-header class="cls-header"><h3 class="cls-h3">Welcome欢迎使用记账本App</h3>
-          <el-dropdown @command="handleCommand">
+          <el-dropdown @click="handleCommand">
             <span class="dropdown-link" style="font-weight: bold;">
               <el-avatar
                   src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
@@ -89,30 +89,67 @@
 
 </style>
 
-<script setup>
+<!--<script setup>-->
+<script >
 import AsidePage from "@/views/AsidePage.vue";
-
-const handleCommand = (command) => {
-  if (command === 'personalInfo') {
-    // 处理查看个人信息的逻辑
-    console.log('查看个人信息');
-  } else if (command === 'logout') {
-    // 处理退出登录的逻辑
-    console.log('退出登录');
-  }
-};
-
-import {ref} from 'vue';
-
 import OverviewPage from "../views/bodyPages/OverviewPage.vue"
 import IncomePage from "../views/bodyPages/IncomePage.vue"
 import GetPay from "../views/bodyPages/GetPay.vue"
 import SettingPage from "../views/bodyPages/SettingPage.vue"
 
-const currentPage = ref('home'); // 默认为首页
-const handleMenuClick = (index) => {
-  currentPage.value = index; // 更新当前选中的页面
-  console.log(index)
-};
-const username = localStorage.getItem('username')
+export default {
+  name: "PreviewPage",
+  components: {
+    AsidePage,
+    OverviewPage,
+    IncomePage,
+    GetPay,
+    SettingPage
+  },
+  data() {
+    return {
+      currentPage: '',
+      username :localStorage.getItem('username'),
+    }
+  },
+  provide() {
+    return {
+      handleMenuClick: this.handleMenuClick
+    };
+  },
+  methods: {
+    handleMenuClick(index){
+      this.currentPage = index; // 更新当前选中的页面
+      console.log(index);
+    },
+    handleCommand(command){
+      if (command === 'personalInfo') {
+    // 处理查看个人信息的逻辑
+        console.log('查看个人信息');
+      } else if (command === 'logout') {
+        // 处理退出登录的逻辑
+        console.log('退出登录');
+      }
+    },
+  }
+}
+// const handleCommand = (command) => {
+//   if (command === 'personalInfo') {
+//     // 处理查看个人信息的逻辑
+//     console.log('查看个人信息');
+//   } else if (command === 'logout') {
+//     // 处理退出登录的逻辑
+//     console.log('退出登录');
+//   }
+// };
+
+// import {ref} from 'vue';
+
+
+// const currentPage = ref('home'); // 默认为首页
+// const handleMenuClick = (index) => {
+//   currentPage.value = index; // 更新当前选中的页面
+//   console.log(index)
+// };
+// const username = localStorage.getItem('username')
 </script>

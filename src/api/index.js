@@ -53,6 +53,12 @@ const api = {
             formData
         )
     },
+    editExpenses(formData) {
+        return axios.put(
+            path.baseURL + path.editExpensesUrl,
+            formData
+        )
+    },
     searchExpenses(beginDate, endDate, title, limit, offset) {
         return axios.post(
             path.baseURL + path.searchExpensesUrl,

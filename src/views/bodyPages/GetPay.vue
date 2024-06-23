@@ -15,7 +15,8 @@
                       end-placeholder="结束日期"
                       :default-time="defaultTime1"
       />
-      <el-button style="border-radius: 20px" type="primary" :icon="SearchIcon">Search</el-button>
+      <el-button style="border-radius: 20px" type="primary"
+                 :icon="SearchIcon" @click="searchDataForm">搜索</el-button>
       <el-button type="success" round @click="dialogFormVisible = true">
         记录支出
       </el-button>
@@ -23,8 +24,7 @@
     </div>
 
     <!--    展示查询结果-->
-    <!--    <GetPayShowData></GetPayShowData>-->
-    <GetPayShowData :begin-date="beginDate" :end-date="endDate">
+    <GetPayShowData ref="child" :begin-date="beginDate" :end-date="endDate">
     </GetPayShowData>
 
     <!--    这里是添加支出的信息-->
@@ -90,6 +90,7 @@ import UserService from "@/utils/userUtil";
 import api from "@/api";
 import billingType from "@/utils/constDataUtil";
 import GetPayShowData from "@/views/bodyPages/GetPayShowData.vue";
+import TimeUtil from "@/utils/timeUtil";
 
 
 export default {
@@ -122,15 +123,6 @@ export default {
     })
   },
   methods: {
-    parseTime(date) {
-      const year = date.getFullYear();
-      const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 使用padStart函数补零
-      const day = date.getDate().toString().padStart(2, '0');
-      const hour = date.getHours().toString().padStart(2, '0');
-      const minute = date.getMinutes().toString().padStart(2, '0');
-      const second = date.getSeconds().toString().padStart(2, '0');
-      return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
-    },
     SureOk() {
       if (this.value1 === null) {
         // 时间选择器清空
@@ -139,8 +131,8 @@ export default {
       } else {
         const startDate = this.value1[0];
         const endDate = this.value1[1];
-        const formattedStartDate = this.parseTime(startDate);
-        const formattedEndDate = this.parseTime(endDate);
+        const formattedStartDate = TimeUtil.parseTime(startDate);
+        const formattedEndDate = TimeUtil.parseTime(endDate);
         // 这两个时间要传给后端
         console.log("开始日期:", formattedStartDate);
         console.log("结束日期:", formattedEndDate);
@@ -150,13 +142,12 @@ export default {
     },
     confirmAdd() {
       this.dialogFormVisible = false;
-      console.log(this.form, 'ppp')
       const formData = {
         title: this.form.title,
         description: this.form.description,
         amount: parseFloat(this.form.amount), // 确保金额是数字
         category_id: this.form.selectCateId,
-        transaction_date: this.parseTime(this.form.transactionDate),
+        transaction_date: TimeUtil.parseTime(this.form.transactionDate),
         type: billingType.Pay,
       };
       api.addExpenses(formData).then(response => {
@@ -165,11 +156,15 @@ export default {
         if (response.data.code !== 1000) {
           alert("请检查是否有必填项未填写⚠️")
         } else {
-          console.log('添加成功')
+          // 刷新表格数据
+          this.$refs.child.fetchData();
         }
       }).catch(error => {
         console.error('错误:', error);
       });
+    },
+    searchDataForm(){
+      this.$refs.child.fetchData();
     },
   }
 }

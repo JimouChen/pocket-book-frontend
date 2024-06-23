@@ -28,8 +28,8 @@ const routes = [
         component: () => import('../views/bodyPages/OverviewPage.vue'),
     },
     {
-        path: '/preview/gey_pay',
-        name: 'gey_pay',
+        path: '/preview/get_pay',
+        name: 'get_pay',
         component: () => import('../views/bodyPages/GetPay.vue'),
     },
     {
