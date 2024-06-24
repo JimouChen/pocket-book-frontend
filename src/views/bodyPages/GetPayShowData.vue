@@ -176,6 +176,10 @@ export default {
       // 删除操作的逻辑
       console.log('Deleting row:', row);
       // 这里可以添加删除数据的请求逻辑
+      api.deleteExpenses(row.bill_id).then(response => {
+        console.log(response.data);
+        this.fetchData();
+      })
     },
     handlePageChange(currentPage) {
       // 由第几页得到offset

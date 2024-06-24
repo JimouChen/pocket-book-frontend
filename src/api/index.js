@@ -47,6 +47,14 @@ const api = {
             }
         )
     },
+    deleteExpenses(billId) {
+        return axios.delete(
+            path.baseURL + path.editExpensesUrl,
+            {
+                data: {billId}
+            }
+        )
+    },
     addExpenses(formData) {
         return axios.post(
             path.baseURL + path.addExpensesUrl,
