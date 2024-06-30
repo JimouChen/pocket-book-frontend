@@ -2,13 +2,14 @@
   <el-row :gutter="16">
     <el-col :span="8">
       <div class="statistic-card">
-        <el-statistic :value="income">
+        <el-statistic :value="Overall">
           <template #title>
-            <div style="display: inline-flex; align-items: center">
-              Daily active users
+            <div style="display: inline-flex; align-items: center;
+            font-weight: bold; font-size: 15px;">
+              至今总交易额
               <el-tooltip
                   effect="dark"
-                  content="至今为之的收入"
+                  content="至今总收入 - 至今总支出"
                   placement="top"
               >
                 <el-icon style="margin-left: 4px" :size="12">
@@ -18,28 +19,34 @@
             </div>
           </template>
         </el-statistic>
-        <div class="statistic-footer">
-          <div class="footer-item">
-            <span>对比上个月</span>
-            <span class="green">
-              24%
-              <el-icon>
-                <CaretTop/>
-              </el-icon>
-            </span>
-          </div>
-        </div>
+        <!--        <div class="statistic-footer">-->
+        <!--          <div class="footer-item">-->
+        <!--            <span>对比上个月</span>-->
+        <!--            <span :class="{'green': cmpLastMonthRate >= 0, 'red': cmpLastMonthRate < 0}">-->
+        <!--             {{ cmpLastMonthRate }}%-->
+        <!--              <el-icon>-->
+        <!--                <template v-if="cmpLastMonthRate >= 0">-->
+        <!--                  <CaretTop/>-->
+        <!--                </template>-->
+        <!--                <template v-else>-->
+        <!--                  <CaretBottom/>-->
+        <!--                </template>-->
+        <!--            </el-icon>-->
+        <!--            </span>-->
+        <!--          </div>-->
+        <!--        </div>-->
       </div>
     </el-col>
     <el-col :span="8">
       <div class="statistic-card">
-        <el-statistic :value="pay">
+        <el-statistic :value="totalPay">
           <template #title>
-            <div style="display: inline-flex; align-items: center">
-              Monthly Active Users
+            <div style="display: inline-flex; align-items: center;
+                font-weight: bold; font-size: 15px;">
+              总支出
               <el-tooltip
                   effect="dark"
-                  content="Number of users who logged into the product in one month"
+                  content="截止至今的总支出"
                   placement="top"
               >
                 <el-icon style="margin-left: 4px" :size="12">
@@ -49,44 +56,59 @@
             </div>
           </template>
         </el-statistic>
-        <div class="statistic-footer">
-          <div class="footer-item">
-            <span>month on month</span>
-            <span class="red">
-              12%
-              <el-icon>
-                <CaretBottom/>
-              </el-icon>
-            </span>
-          </div>
-        </div>
+        <!--        <div class="statistic-footer">-->
+        <!--          <div class="footer-item">-->
+        <!--            <span>对比上一年</span>-->
+        <!--            <span :class="{'green': cmpLastYearPayRate >= 0, 'red': cmpLastYearPayRate < 0}">-->
+        <!--             {{ cmpLastYearPayRate }}%-->
+        <!--              <el-icon>-->
+        <!--                <template v-if="cmpLastYearPayRate >= 0">-->
+        <!--                  <CaretTop/>-->
+        <!--                </template>-->
+        <!--                <template v-else>-->
+        <!--                  <CaretBottom/>-->
+        <!--                </template>-->
+        <!--            </el-icon>-->
+        <!--            </span>-->
+        <!--          </div>-->
+        <!--        </div>-->
       </div>
     </el-col>
     <el-col :span="8">
       <div class="statistic-card">
-        <el-statistic :value="total" title="New transactions today">
+        <el-statistic :value="totalIncome" title="New transactions today">
           <template #title>
-            <div style="display: inline-flex; align-items: center">
-              New transactions today
+            <div style="display: inline-flex; align-items: center;
+          font-weight: bold; font-size: 15px;">
+              总收入
+              <el-tooltip
+                  effect="dark"
+                  content="截止至今的总收入"
+                  placement="top"
+              >
+                <el-icon style="margin-left: 4px" :size="12">
+                  <Warning/>
+                </el-icon>
+              </el-tooltip>
             </div>
           </template>
         </el-statistic>
-        <div class="statistic-footer">
-          <div class="footer-item">
-            <span>than yesterday</span>
-            <span class="green">
-              16%
-              <el-icon>
-                <CaretTop/>
-              </el-icon>
-            </span>
-          </div>
-          <div class="footer-item">
-            <el-icon :size="14">
-              <ArrowRight/>
-            </el-icon>
-          </div>
-        </div>
+        <!--        <div class="statistic-footer">-->
+        <!--          <div class="footer-item">-->
+        <!--            <span>对比上一年</span>-->
+        <!--            <span :class="{'green': cmpLastYearIncomeRate >= 0, 'red': cmpLastYearIncomeRate < 0}">-->
+        <!--             {{ cmpLastYearIncomeRate }}%-->
+        <!--              <el-icon>-->
+        <!--                <template v-if="cmpLastYearIncomeRate >= 0">-->
+        <!--                  <CaretTop/>-->
+        <!--                </template>-->
+        <!--                <template v-else>-->
+        <!--                  <CaretBottom/>-->
+        <!--                </template>-->
+        <!--            </el-icon>-->
+        <!--            </span>-->
+        <!--          </div>-->
+        <!--        </div>-->
       </div>
     </el-col>
   </el-row>
@@ -94,26 +116,35 @@
 
 <script>
 import {
-  ArrowRight,
-  CaretBottom,
-  CaretTop,
+  // CaretBottom,
+  // CaretTop,
   Warning,
 } from '@element-plus/icons-vue'
+import api from "@/api";
 
 export default {
   components: {
-    ArrowRight,
-    CaretBottom,
-    CaretTop,
+    // CaretBottom,
+    // CaretTop,
     Warning,
   },
   name: "CntPreview",
+  props: ['StartDate', 'EndDate'],
   data() {
     return {
-      income: 11100,
-      pay: 23113,
-      total: 888
+      Overall: 11100,
+      totalPay: 23113,
+      totalIncome: 888,
+      // cmpLastMonthRate: 29,
+      // cmpLastYearPayRate: -13,
+      // cmpLastYearIncomeRate: 8.1,
     }
+  },
+  created() {
+    // 计算初始值和百分比并更新
+    api.searchExpensesOverall(this.StartDate, this.EndDate).then(response=>{
+      console.log(response.data, 'fkk');
+    });
   }
 }
 </script>
@@ -130,7 +161,7 @@ export default {
 .statistic-card {
   height: 100%;
   padding: 20px;
-  border-radius: 4px;
+  border-radius: 15px;
   background-color: var(--el-bg-color-overlay);
 }
 
@@ -139,7 +170,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--el-text-color-regular);
   margin-top: 16px;
 }

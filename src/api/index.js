@@ -79,7 +79,16 @@ const api = {
                 offset: offset
             }
         )
-    }
+    },
+    searchExpensesOverall(beginDate, endDate) {
+        return axios.post(
+            path.baseURL + path.searchExpensesOverallUrl,
+            {
+                start_time: beginDate,
+                end_time: endDate,
+            }
+        )
+    },
 
 }
 

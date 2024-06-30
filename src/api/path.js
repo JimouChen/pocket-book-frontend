@@ -10,6 +10,7 @@ const base = {
     editExpensesUrl: '/billing/expenses',
     deleteExpensesUrl: '/billing/expenses',
     searchExpensesUrl: '/billing/search',
+    searchExpensesOverallUrl: '/billing/searchPreview',
 }
 
 export default base;

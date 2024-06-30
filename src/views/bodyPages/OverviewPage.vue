@@ -14,7 +14,7 @@
       />
       <el-button style="border-radius: 20px" type="primary" :icon="SearchIcon">Search</el-button>
       <p> 这里展示查询结果</p>
-    <CntPreview></CntPreview>
+    <CntPreview :startDate="StartDate" :endDate="EndDate"></CntPreview>
 
     </div>
     <!--    右侧是添加分类和展示分类的模块-->
@@ -40,7 +40,8 @@ export default {
       value1: [],
       SearchIcon: Search,
       defaultTime1: new Date(2000, 1, 1, 12, 0, 0),
-
+      StartDate: '',
+      EndDate: '',
     };
   },
 
@@ -57,6 +58,8 @@ export default {
         // 这两个时间要传给后端
         console.log("开始日期:", formattedStartDate);
         console.log("结束日期:", formattedEndDate);
+        this.StartDate = formattedStartDate;
+        this.EndDate = formattedEndDate;
       }
     },
 
