@@ -6,15 +6,19 @@
       </p>
 
       <el-date-picker @change="SureOk"
+                      @clear="handleClear"
                       v-model="value1"
                       type="datetimerange"
                       start-placeholder="开始日期"
                       end-placeholder="结束日期"
                       :default-time="defaultTime1"
       />
-      <el-button style="border-radius: 20px" type="primary" :icon="SearchIcon">Search</el-button>
-      <p> 这里展示查询结果</p>
-    <CntPreview :startDate="StartDate" :endDate="EndDate"></CntPreview>
+      <el-button style="border-radius: 20px" type="primary"
+                 @click="callCntPayIncomeByDate" :icon="SearchIcon"
+                 >Search
+      </el-button>
+      <p> 查询结果</p>
+      <CntPreview ref="childComponentRef" :startDate="StartDate" :endDate="EndDate"></CntPreview>
 
     </div>
     <!--    右侧是添加分类和展示分类的模块-->
@@ -62,7 +66,13 @@ export default {
         this.EndDate = formattedEndDate;
       }
     },
-
+    handleClear(){
+      this.StartDate = '';
+      this.EndDate = '';
+    },
+    callCntPayIncomeByDate() {
+      this.$refs.childComponentRef.CntByDate(this.StartDate, this.EndDate);
+    }
   },
 
 };

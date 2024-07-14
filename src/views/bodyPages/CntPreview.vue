@@ -2,7 +2,7 @@
   <el-row :gutter="16">
     <el-col :span="8">
       <div class="statistic-card">
-        <el-statistic :value="Overall">
+        <el-statistic :value="formattedOverall" :value-style="{ color: '#5876ec', fontWeight: 'bold' }">
           <template #title>
             <div style="display: inline-flex; align-items: center;
             font-weight: bold; font-size: 15px;">
@@ -39,7 +39,7 @@
     </el-col>
     <el-col :span="8">
       <div class="statistic-card">
-        <el-statistic :value="totalPay">
+        <el-statistic :value-style="{ color: '#ec586e', fontWeight: 'bold' }" :value="formattedTotalPay">
           <template #title>
             <div style="display: inline-flex; align-items: center;
                 font-weight: bold; font-size: 15px;">
@@ -76,7 +76,8 @@
     </el-col>
     <el-col :span="8">
       <div class="statistic-card">
-        <el-statistic :value="totalIncome" title="New transactions today">
+        <el-statistic :value="formattedTotalIncome" :value-style="{ color: '#5be55b', fontWeight: 'bold' }"
+                      title="New transactions today">
           <template #title>
             <div style="display: inline-flex; align-items: center;
           font-weight: bold; font-size: 15px;">
@@ -140,12 +141,37 @@ export default {
       // cmpLastYearIncomeRate: 8.1,
     }
   },
+  computed: {
+    formattedTotalIncome() {
+      return this.totalIncome.toFixed(2);
+    },
+    formattedTotalPay() {
+      return this.totalPay.toFixed(2);
+    },
+    formattedOverall() {
+      return this.Overall.toFixed(2);
+    }
+  },
   created() {
     // 计算初始值和百分比并更新
-    api.searchExpensesOverall(this.StartDate, this.EndDate).then(response=>{
-      console.log(response.data, 'fkk');
+    api.searchExpensesOverall(this.StartDate, this.EndDate).then(response => {
+      const resp = response.data.data;
+      this.Overall = resp.overall;
+      this.totalPay = resp.total_pay;
+      this.totalIncome = resp.total_income;
     });
-  }
+  },
+  methods: {
+    CntByDate(StartDate, EndDate) {
+      // 计算初始值和百分比并更新
+      api.searchExpensesOverall(StartDate, EndDate).then(response => {
+        const resp = response.data.data;
+        this.Overall = resp.overall;
+        this.totalPay = resp.total_pay;
+        this.totalIncome = resp.total_income;
+      });
+    },
+  },
 }
 </script>
 
